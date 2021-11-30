@@ -75,3 +75,14 @@ export const Employee = ({ employee, setter }) => {
         </article>
     )
 }
+//{
+//     getCurrentUser().employee
+//     ? ""
+//     : <div className="centerChildren btn--newResource">
+//         <button type="button"
+//             className="btn btn-success "
+//             onClick={() => { history.push("/animals/new") }}>
+//             Register Animal
+//         </button>
+//     </div>
+// }
