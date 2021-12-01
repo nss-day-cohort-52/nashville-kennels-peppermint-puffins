@@ -25,7 +25,7 @@ export const EmployeeForm = (props) => {
         }
     }
 
-    const handleUserInput = (event) => {
+    const handleUserInput = (event) => { // might need to duplicate this for locations?
         const copy = {...employee}
         copy[event.target.id] = event.target.value
         updateEmployee(copy)

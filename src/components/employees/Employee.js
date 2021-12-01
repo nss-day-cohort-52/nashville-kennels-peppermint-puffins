@@ -6,7 +6,7 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
 import { EmployeeForm } from "./EmployeeForm";
-
+import AnimalRepository from "../../repositories/AnimalRepository"
 
 export const Employee = ({ employee, setter }) => {
     const [animalCount, setCount] = useState(0)
@@ -30,6 +30,12 @@ export const Employee = ({ employee, setter }) => {
         }
     }, [resource])
 
+    useEffect(
+        () => {
+           const animalCount = AnimalRepository.getAll()
+        }, []
+    )
+
     return (
         <article className={classes}>
             <section className="card-body">
@@ -52,10 +58,14 @@ export const Employee = ({ employee, setter }) => {
                     employeeId //ternary statement and param to be passed through resource to access employees
                         ? <>
                             <section>
-                                Caring for 0 animals
+                                Caring for {resource?.animals?.length} animals 
                             </section>
                             <section>
-                                Working at unknown location
+                                Working at {resource?.locations?.map(
+                                   (location) => { 
+                                      return location.location.name 
+                                   }
+                                ).join(", ")} location
                             </section>
                         </>
                         : ""
