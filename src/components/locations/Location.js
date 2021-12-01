@@ -14,7 +14,7 @@ export default ({location}) => {
                         to={{
                             pathname: `/locations/${location.id}`,
                             state: { location: location }
-                        }}>
+                        }}> 
                         {location.name}
                     </Link>
                 </h5>

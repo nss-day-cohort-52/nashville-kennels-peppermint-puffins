@@ -5,7 +5,7 @@ import useResourceResolver from "../../hooks/resource/useResourceResolver";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
-
+import AnimalRepository from "../../repositories/AnimalRepository"
 
 export default ({ employee }) => {
     const [animalCount, setCount] = useState(0)
@@ -27,6 +27,12 @@ export default ({ employee }) => {
             markLocation(resource.employeeLocations[0])
         }
     }, [resource])
+
+    useEffect(
+        () => {
+           const animalCount = AnimalRepository.getAll()
+        }, []
+    )
 
     return (
         <article className={classes}>
@@ -50,10 +56,10 @@ export default ({ employee }) => {
                     employeeId
                         ? <>
                             <section>
-                                Caring for 0 animals
+                                Caring for  animals 
                             </section>
                             <section>
-                                Working at unknown location
+                                Working at  location
                             </section>
                         </>
                         : ""
