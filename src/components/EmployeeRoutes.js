@@ -1,11 +1,10 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { EmployeeList } from "./employees/EmployeeList"
+import { EmployeeForm } from "./employees/EmployeeForm"
+import { Employee } from "./employees/Employee"
 
-import Employee from "./employees/Employee"
-import EmployeeList from "./employees/EmployeeList"
-import EmployeeForm from "./employees/EmployeeForm"
-
-export default () => {
+export const EmployeeRoutes = () => {
     return (
         <>
             <Route exact path="/employees">

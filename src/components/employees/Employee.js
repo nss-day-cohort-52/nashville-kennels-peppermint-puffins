@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import React, { useState, useEffect, useImperativeHandle } from "react"
+import { Link, useParams, useHistory } from "react-router-dom"
 import EmployeeRepository from "../../repositories/EmployeeRepository";
 import useResourceResolver from "../../hooks/resource/useResourceResolver";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
+import { EmployeeForm } from "./EmployeeForm";
 
 
-export default ({ employee }) => {
+export const Employee = ({ employee, setter }) => {
     const [animalCount, setCount] = useState(0)
     const [location, markLocation] = useState({ name: "" })
     const [classes, defineClasses] = useState("card employee")
     const { employeeId } = useParams()
     const { getCurrentUser } = useSimpleAuth()
     const { resolveResource, resource } = useResourceResolver()
+    const history = useHistory()
 
     useEffect(() => {
         if (employeeId) {
@@ -47,7 +49,7 @@ export default ({ employee }) => {
                     }
                 </h5>
                 {
-                    employeeId
+                    employeeId //ternary statement 
                         ? <>
                             <section>
                                 Caring for 0 animals
@@ -58,13 +60,29 @@ export default ({ employee }) => {
                         </>
                         : ""
                 }
-
                 {
-                    <button className="btn--fireEmployee" onClick={() => {}}>Fire</button>
-                }
-
+                    <button className="btn--fireEmployee" onClick={() => {
+                        
+                        EmployeeRepository.delete(resource.id ) //fetch call to delete employee when fire button is clicked
+                        .then(() => EmployeeRepository.getAll().then(setter))
+                        .then(()=> history.push("/employees"))
+                        
+                    }}>Fire</button>
+                
+        }
             </section>
 
         </article>
     )
 }
+//{
+//     getCurrentUser().employee
+//     ? ""
+//     : <div className="centerChildren btn--newResource">
+//         <button type="button"
+//             className="btn btn-success "
+//             onClick={() => { history.push("/animals/new") }}>
+//             Register Animal
+//         </button>
+//     </div>
+// }
