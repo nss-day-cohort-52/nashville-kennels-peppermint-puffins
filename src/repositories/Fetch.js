@@ -1,9 +1,11 @@
-export const fetchIt = (url, method = "GET", body = null) => {
+//Exporting "fetchIt" function with default response parameters
+export const    fetchIt = (url, method = "GET", body = null) => {
+//Default values for fetch options    
     let options = {
         "method": method,
         "headers": {}
     }
-
+//Switch method from default "GET" to indicated case method
     switch (method) {
         case "POST":
         case "PUT":
@@ -14,14 +16,15 @@ export const fetchIt = (url, method = "GET", body = null) => {
         default:
             break;
     }
-
+//If the body parameter is "not" null, body will accept passed in body values
     if (body !== null) {
         options.body = body
     }
-
+/*Return is a fetch of URL with options to the API
+translates response into json*/    
     return fetch(url, options).then(r => r.json())
 }
-
+//Basic request function. Initializes URL with default options and headers.
 export const request = {
     init(url) {
         this.options = {}
@@ -64,7 +67,8 @@ export const request = {
         }
         return this
     },
-
+/*Default function to recall information back from API. 
+Even if entry deleted, updated information needs to be parsed and deleted.*/ 
     async send() {
         const req = await fetch(this.url, this.options)
         const parsed = await req.json()
