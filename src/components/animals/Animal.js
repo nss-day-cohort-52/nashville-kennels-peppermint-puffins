@@ -136,8 +136,8 @@ export const Animal = ({ animal, syncAnimals,
                                     AnimalOwnerRepository
                                         .removeOwnersAndCaretakers(currentAnimal.id)
                                         .then(() => {AnimalRepository.delete(currentAnimal.id)}) // Remove animal
-                                        .then(() => AnimalRepository.getAll().then(syncAnimals))
-                                        .then(() => {history.push("/animals")}) // Get all animals
+                                        .then(() => AnimalRepository.getAll().then(syncAnimals))//get animal list back and use 'syncAnimals' since that is the parameter used by resource
+                                        .then(() => {history.push("/animals")}) // takes user back to animals list
                                 }>Discharge</button>
                                 : ""
                         }
