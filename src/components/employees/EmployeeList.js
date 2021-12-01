@@ -18,7 +18,9 @@ export const EmployeeList = () => {
             <div className="employees">
                 {
                     emps.map(a => <Employee key={a.id} employee={a} setter={setEmployees} />)
+                    
                 }
+                
             </div>
         </>
     )

@@ -30,6 +30,12 @@ export const Employee = ({ employee, setter }) => {
         }
     }, [resource])
 
+    // useEffect(() => {
+    //     if (resource?.animalCount?.length > 0) {
+    //         setCount(resource.animalCount[0])
+    //     }
+    // }, [resource])
+
     useEffect(
         () => {
            const animalCount = AnimalRepository.getAll()
@@ -50,9 +56,11 @@ export const Employee = ({ employee, setter }) => {
                                     state: { employee: resource }
                                 }}>
                                 {resource.name}
-                            </Link>
-
+                            </Link>       
                     }
+                    <div>
+                    {/* Caring for {resource?.animalCaretakers?.length} animals  */}
+                    </div>
                 </h5>
                 {
                     employeeId //ternary statement and param to be passed through resource to access employees
