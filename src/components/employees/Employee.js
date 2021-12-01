@@ -69,9 +69,9 @@ export const Employee = ({ employee, setter }) => {
                                 Caring for {resource?.animals?.length} animals 
                             </section>
                             <section>
-                                Working at {resource?.locations?.map(
+                                Working at {resource?.locations?.map(//mapped through to pull out object in array to access property of 'name'
                                    (location) => { 
-                                      return location.location.name 
+                                      return location.location.name //location is an array and also an object in that array
                                    }
                                 ).join(", ")} location
                             </section>
