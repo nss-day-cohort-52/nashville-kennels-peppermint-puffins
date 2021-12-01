@@ -3,7 +3,7 @@ import EmployeeRepository from "../../repositories/EmployeeRepository";
 import "./EmployeeForm.css"
 
 
-export default (props) => {
+export const EmployeeForm = (props) => {
     const [employee, updateEmployee] = useState()
     const [locations, defineLocations] = useState([])
 
