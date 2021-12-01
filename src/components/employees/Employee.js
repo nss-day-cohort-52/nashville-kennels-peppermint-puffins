@@ -58,10 +58,14 @@ export const Employee = ({ employee, setter }) => {
                     employeeId //ternary statement 
                         ? <>
                             <section>
-                                Caring for  animals 
+                                Caring for {resource?.animals?.length} animals 
                             </section>
                             <section>
-                                Working at  location
+                                Working at {resource?.locations?.map(
+                                   (location) => { 
+                                      return location.location.name 
+                                   }
+                                ).join(", ")} location
                             </section>
                         </>
                         : ""

@@ -20,10 +20,10 @@ export default ({location}) => {
                 </h5>
             </section>
             <section>
-                Total animals
+                {location.animals.length} animals
             </section>
             <section>
-                Total locations
+                {location.employeeLocations.length} employees
             </section>
         </article>
     )
