@@ -6,7 +6,7 @@ import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
 import { EmployeeForm } from "./EmployeeForm";
-
+import AnimalRepository from "../../repositories/AnimalRepository"
 
 export const Employee = ({ employee, setter }) => {
     const [animalCount, setCount] = useState(0)
@@ -21,7 +21,7 @@ export const Employee = ({ employee, setter }) => {
         if (employeeId) {
             defineClasses("card employee--single")
         }
-        resolveResource(employee, employeeId, EmployeeRepository.get)
+        resolveResource(employee, employeeId, EmployeeRepository.get) //(property, param, getter function)
     }, [])
 
     useEffect(() => {
@@ -29,6 +29,12 @@ export const Employee = ({ employee, setter }) => {
             markLocation(resource.employeeLocations[0])
         }
     }, [resource])
+
+    useEffect(
+        () => {
+           const animalCount = AnimalRepository.getAll()
+        }, []
+    )
 
     return (
         <article className={classes}>
@@ -49,40 +55,36 @@ export const Employee = ({ employee, setter }) => {
                     }
                 </h5>
                 {
-                    employeeId //ternary statement 
+                    employeeId //ternary statement and param to be passed through resource to access employees
                         ? <>
                             <section>
-                                Caring for 0 animals
+                                Caring for {resource?.animals?.length} animals 
                             </section>
                             <section>
-                                Working at {resource?.locations?.keys(location)} locations
+                                Working at {resource?.locations?.map(
+                                   (location) => { 
+                                      return location.location.name 
+                                   }
+                                ).join(", ")} location
                             </section>
                         </>
                         : ""
                 }
                 {
+                    getCurrentUser().employee //get current signed in user and if employee key is true then show 
+                    // fire button
+                    ? //another ternary statement for the fire button
                     <button className="btn--fireEmployee" onClick={() => {
                         
                         EmployeeRepository.delete(resource.id ) //fetch call to delete employee when fire button is clicked
-                        .then(() => EmployeeRepository.getAll().then(setter))
-                        .then(()=> history.push("/employees"))
+                        .then(() => EmployeeRepository.getAll().then(setter))//setter function to give this module access to employees that are set in different module
+                        .then(()=> history.push("/employees"))//this takes user back to employees page after firing from profile
                         
                     }}>Fire</button>
-                
+                    : "" //else show nothing if user is not an employee
         }
             </section>
 
         </article>
     )
 }
-//{
-//     getCurrentUser().employee
-//     ? ""
-//     : <div className="centerChildren btn--newResource">
-//         <button type="button"
-//             className="btn btn-success "
-//             onClick={() => { history.push("/animals/new") }}>
-//             Register Animal
-//         </button>
-//     </div>
-// }

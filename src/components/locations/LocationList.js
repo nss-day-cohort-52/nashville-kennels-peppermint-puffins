@@ -5,15 +5,20 @@ import "./LocationList.css"
 
 
 export const LocationList = () => {
-    const [ locations, updateLocations ] = useState([])
+    const [locations, updateLocations] = useState([])
 
     useEffect(() => {
-        LocationRepository.getAll()
+        LocationRepository.getAll().then(updateLocations)
     }, [])
 
     return (
-        <div className="locations">
-            {locations.map(l => <Location key={l.id} location={l} />)}
-        </div>
+        <>
+            <div className="locations">
+                {
+                    locations.map(
+                        location =>
+                            <Location key={location.id} location={location} />)}
+            </div>
+        </>
     )
 }

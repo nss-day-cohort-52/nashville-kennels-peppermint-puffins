@@ -14,16 +14,16 @@ export default ({location}) => {
                         to={{
                             pathname: `/locations/${location.id}`,
                             state: { location: location }
-                        }}>
+                        }}> 
                         {location.name}
                     </Link>
                 </h5>
             </section>
             <section>
-                Total animals
+                {location.animals.length} animals
             </section>
             <section>
-                Total locations
+                {location.employeeLocations.length} employees
             </section>
         </article>
     )

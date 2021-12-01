@@ -10,4 +10,8 @@ obj
 dist
 build
 deploy.sh
+<<<<<<< HEAD
 database.json
+=======
+database.json
+>>>>>>> ac234a8589897b62ea505781ec9bda24f5480307
