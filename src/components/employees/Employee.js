@@ -55,7 +55,7 @@ export const Employee = ({ employee, setter }) => {
                                 Caring for 0 animals
                             </section>
                             <section>
-                                Working at unknown location
+                                Working at {resource?.locations?.keys(location)} locations
                             </section>
                         </>
                         : ""
