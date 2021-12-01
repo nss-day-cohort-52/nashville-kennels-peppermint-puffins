@@ -21,7 +21,7 @@ export const Employee = ({ employee, setter }) => {
         if (employeeId) {
             defineClasses("card employee--single")
         }
-        resolveResource(employee, employeeId, EmployeeRepository.get)
+        resolveResource(employee, employeeId, EmployeeRepository.get) //(property, param, getter function)
     }, [])
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const Employee = ({ employee, setter }) => {
                     }
                 </h5>
                 {
-                    employeeId //ternary statement 
+                    employeeId //ternary statement and param to be passed through resource to access employees
                         ? <>
                             <section>
                                 Caring for {resource?.animals?.length} animals 
@@ -71,28 +71,20 @@ export const Employee = ({ employee, setter }) => {
                         : ""
                 }
                 {
+                    getCurrentUser().employee //get current signed in user and if employee key is true then show 
+                    // fire button
+                    ? //another ternary statement for the fire button
                     <button className="btn--fireEmployee" onClick={() => {
                         
                         EmployeeRepository.delete(resource.id ) //fetch call to delete employee when fire button is clicked
-                        .then(() => EmployeeRepository.getAll().then(setter))
-                        .then(()=> history.push("/employees"))
+                        .then(() => EmployeeRepository.getAll().then(setter))//setter function to give this module access to employees that are set in different module
+                        .then(()=> history.push("/employees"))//this takes user back to employees page after firing from profile
                         
                     }}>Fire</button>
-                
+                    : "" //else show nothing if user is not an employee
         }
             </section>
 
         </article>
     )
 }
-//{
-//     getCurrentUser().employee
-//     ? ""
-//     : <div className="centerChildren btn--newResource">
-//         <button type="button"
-//             className="btn btn-success "
-//             onClick={() => { history.push("/animals/new") }}>
-//             Register Animal
-//         </button>
-//     </div>
-// }
