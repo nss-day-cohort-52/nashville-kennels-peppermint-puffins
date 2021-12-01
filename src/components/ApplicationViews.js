@@ -2,12 +2,12 @@ import React from "react"
 import { Route } from "react-router-dom"
 
 import AnimalRoutes from "./AnimalRoutes"
-import EmployeeRoutes from "./EmployeeRoutes"
+import { EmployeeRoutes } from "./EmployeeRoutes"
 import LocationRoutes from "./LocationRoutes"
 import SearchResults from "./search/SearchResults"
 
 
-export default () => {
+export const ApplicationViews = () => {
     return (
         <>
             <LocationRoutes />

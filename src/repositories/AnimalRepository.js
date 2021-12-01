@@ -34,7 +34,7 @@ export default {
     async getAll() {
         const users = await OwnerRepository.getAll()
         const animals = await fetchIt(`${Settings.remoteURL}/animals?_embed=animalOwners&_embed=treatments&_embed=animalCaretakers`)
-            .then(data => {
+            .then(data => { //.then is used to modify code once it is retrieved and await is used to grab information but not manipulate.
                 const embedded = data.map(animal => {
                     animal = expandAnimalUser(animal, users)
                     return animal

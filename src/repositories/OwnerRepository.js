@@ -1,4 +1,4 @@
-import Settings from "./Settings"
+import Settings from "./Settings" //importing URL to fetch calls
 import { fetchIt } from "./Fetch"
 
 export default {
