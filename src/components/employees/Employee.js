@@ -30,17 +30,14 @@ export const Employee = ({ employee, setter }) => {
         }
     }, [resource])
 
-    // useEffect(() => {
-    //     if (resource?.animalCount?.length > 0) {
-    //         setCount(resource.animalCount[0])
-    //     }
-    // }, [resource])
-
-    useEffect(
-        () => {
-           const animalCount = AnimalRepository.getAll()
-        }, []
-    )
+    useEffect(() => { // a use effect to get the animals that each employee is taking care of from the emp repository
+        if (!("animals" in resource) ) {
+            EmployeeRepository.getAnimals(resource.id) // created getAnimals in Emp Repository
+            .then((animalArray) => { 
+                setCount(animalArray.length)
+            })
+        }
+    }, [resource])
 
     return (
         <article className={classes}>
@@ -58,10 +55,8 @@ export const Employee = ({ employee, setter }) => {
                                 {resource.name}
                             </Link>       
                     }
-                    <div>
-                    {/* Caring for {resource?.animalCaretakers?.length} animals  */}
-                    </div>
                 </h5>
+                
                 {
                     employeeId //ternary statement and param to be passed through resource to access employees
                         ? <>
@@ -71,12 +66,14 @@ export const Employee = ({ employee, setter }) => {
                             <section>
                                 Working at {resource?.locations?.map(//mapped through to pull out object in array to access property of 'name'
                                    (location) => { 
-                                      return location.location.name //location is an array and also an object in that array
+                                      return  location.location.name  //location is an array and also an object in that array
                                    }
-                                ).join(", ")} location
+                                ).join(", ")}
                             </section>
                         </>
-                        : ""
+                        : <div>
+                        Taking care of {animalCount} animals
+                    </div>
                 }
                 {
                     getCurrentUser().employee //get current signed in user and if employee key is true then show 
