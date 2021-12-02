@@ -9,7 +9,7 @@ import { EmployeeForm } from "./EmployeeForm";
 import AnimalRepository from "../../repositories/AnimalRepository"
 
 export const Employee = ({ employee, setter }) => {
-    const [animalCaretaker, setCount] = useState(0)
+    const [animalCount, setCount] = useState(0)
     const [location, markLocation] = useState({ name: "" })
     const [classes, defineClasses] = useState("card employee")
     const { employeeId } = useParams()
@@ -30,13 +30,6 @@ export const Employee = ({ employee, setter }) => {
         }
     }, [resource])
 
-    useEffect(
-        () => {
-           if (resource?.animalCaretaker?.length > 0) {
-               markCount(resource.animalCaretaker[0])
-           }
-        }, [resource])
-
     return (
         <article className={classes}>
             <section className="card-body">
@@ -51,7 +44,6 @@ export const Employee = ({ employee, setter }) => {
                                     state: { employee: resource }
                                 }}>
                                 {resource.name}
-                                {resource.animalCaretaker}
                             </Link>
 
                     }
