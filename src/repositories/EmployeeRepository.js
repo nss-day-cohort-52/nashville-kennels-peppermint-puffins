@@ -23,5 +23,8 @@ export default {
     },
     async getAll() {
         return await fetchIt(`${Settings.remoteURL}/users?employee=true&_embed=employeeLocations`)
+    },
+    async getAnimals(id) {
+        return await fetchIt(`${Settings.remoteURL}/animalCaretakers?userId=${id}&_expand=animal`)
     }
 }
